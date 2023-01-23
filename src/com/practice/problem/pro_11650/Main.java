@@ -32,7 +32,6 @@ public class Main {
 
             tempArr = br.readLine().split(" ");
 
-
             while(Integer.parseInt(tempArr[0]) <= cmpPosX){
 
                 if(Integer.parseInt(tempArr[0]) == cmpPosX){
