@@ -1,4 +1,4 @@
-package com.practice.problem;
+package com.practice.problem.pro_2742;
 
 import java.io.*;
 
@@ -8,12 +8,9 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int year = Integer.parseInt(br.readLine().trim());
-
-        if(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0 )){
-            bw.write(String.valueOf(1));
-        } else {
-            bw.write(String.valueOf(0));
+        int inputNum = Integer.parseInt(br.readLine().trim());
+        for(int i = 0; i< inputNum; i++){
+            bw.write(String.valueOf(inputNum - i) + "\n");
         }
 
         bw.close();
