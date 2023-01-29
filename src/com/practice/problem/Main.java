@@ -1,6 +1,7 @@
 package com.practice.problem;
 
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -8,14 +9,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int year = Integer.parseInt(br.readLine().trim());
-
-        if(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0 )){
-            bw.write(String.valueOf(1));
-        } else {
-            bw.write(String.valueOf(0));
-        }
-
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        bw.write(String.valueOf(Integer.parseInt(st.nextToken()) * Integer.parseInt(st.nextToken())));
         bw.close();
     }
 }
