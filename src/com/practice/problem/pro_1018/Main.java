@@ -23,28 +23,142 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         StringTokenizer st = new StringTokenizer(br.readLine().trim());
-        int width = Integer.parseInt(st.nextToken());
         int height = Integer.parseInt(st.nextToken());
-        char[][] inputArr = new char[width][height];
+        int width = Integer.parseInt(st.nextToken());
 
+        // 이차원 배열 선언
+        char[][] inputArr = new char[height][width];
 
+        // 입력을 이차원 배열로 초기화
         for(int i = 0; i < height; i++){
             char[] inputLine = br.readLine().trim().toCharArray();
+
             for(int j = 0; j < width; j++){
                 inputArr[i][j] = inputLine[j];
             }
         }
 
-        int[][] testArr = new int[8][8];
+        // 최소가 될 수 없는 65를 최소로 초기화 -> 어떤 값이 와도 갱신 가능
+        int minVal = 65;
 
+        int count;
+
+        char beforeVal;
+        char beforeParagraphVal;
         for(int i = 0; i <= height - 8; i++){
             // 세로에서 한 칸 내려가면서 반복
 
             for(int j = 0; j <= width - 8; j++){
                 // 가로 한 칸 옆으로 가면서 끝까지 감
 
+                // count 초기화
+                count = 0;
+
+                /** 가장 처음 값이 B인 버전 : 다음번부터는 W로 시작해야 함. */
+                beforeVal = 'B';
+                beforeParagraphVal = 'B';
+
+                if(inputArr[i][j] != 'B'){
+                    count++;
+                }
+
+                for(int a = i; a < i+8; a++){
+
+                    // beforeVal 초기화 -> 윗변과의 차이점을 고려하여 반대로 설정
+                    if(a > i){
+                        if(beforeParagraphVal == 'B'){
+                            beforeVal = 'W';
+                            beforeParagraphVal = 'W';
+                            if(inputArr[a][j] != 'W'){
+                                count++;
+                            }
+                        } else {
+                            beforeVal = 'B';
+                            beforeParagraphVal = 'B';
+                            if(inputArr[a][j] != 'B'){
+                                count++;
+                            }
+                        }
+                    }
+
+                    for(int b = j; b < j+8; b++){
+                        if(b != j+7 && beforeVal == inputArr[a][b+1]){
+                            // 옆에 있는 요소들과 같으면 색칠해줘야 함
+                            count++;
+                            if(inputArr[a][b+1] == 'W'){
+                                beforeVal = 'B';
+                            } else {
+                                beforeVal = 'W';
+                            }
+                        }else {
+                            // 다음 요소로 beforeVal 갱신
+                            if(b < j+7){
+                                beforeVal = inputArr[a][b+1];
+                            }
+                        }
+                    }
+                }
+
+                if(minVal > count){
+                    minVal = count;
+                }
+
+                // count 초기화
+                count = 0;
+
+                /** 가장 처음 값이 W인 버전 : 다음번부터는 B로 시작해야 함. */
+                beforeVal = 'W';
+                beforeParagraphVal = 'W';
+
+                if(inputArr[i][j] != 'W'){
+                    count++;
+                }
+
+                for(int a = i; a < i+8; a++){
+
+                    // beforeVal 초기화 -> 윗변과의 차이점을 고려하여 반대로 설정
+                    if(a > i){
+                        if(beforeParagraphVal == 'B'){
+                            beforeVal = 'W';
+                            beforeParagraphVal = 'W';
+                            if(inputArr[a][j] != 'W'){
+                                count++;
+                            }
+                        } else {
+                            beforeVal = 'B';
+                            beforeParagraphVal = 'B';
+                            if(inputArr[a][j] != 'B'){
+                                count++;
+                            }
+                        }
+                    }
+
+                    for(int b = j; b < j+8; b++){
+                        if(b != j+7 && beforeVal == inputArr[a][b+1]){
+                            // 옆에 있는 요소들과 같으면 색칠해줘야 함
+                            count++;
+                            if(inputArr[a][b+1] == 'W'){
+                                beforeVal = 'B';
+                            } else {
+                                beforeVal = 'W';
+                            }
+                        }else {
+                            // 다음 요소로 beforeVal 갱신
+                            if(b < j+7){
+                                beforeVal = inputArr[a][b+1];
+                            }
+                        }
+                    }
+                }
+
+                if(minVal > count){
+                    minVal = count;
+                }
+
             }
         }
 
+        bw.write(String.valueOf(minVal));
+        bw.close();
     }
 }
