@@ -14,7 +14,6 @@ public class Main {
      *  - mid는 inputNum만큼 반복문을 돌려 입력 값들을 mid로 나눈 몫을 랜선테스트 변수에 누적하고, 이를 처음 제시된 랜선 갯수와 비교하여 테스트한다.
      * mid 값이 start 값과 같아지면 탈출한다.
      * */
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
